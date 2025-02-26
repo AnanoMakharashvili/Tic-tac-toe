@@ -18,7 +18,14 @@ main {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  gap: 16px;
+  gap: 17px;
+}
+
+#first-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 17px;
 }
 
 .pick-player-container {
@@ -30,7 +37,7 @@ main {
   align-items: center;
   box-shadow: inset 0 -8px 0#10212A;
   border-radius: 10px;
-  padding: 35px;
+  padding: 22px;
 }
 
 .pick-style {
@@ -48,7 +55,6 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-
   gap: 75px;
 }
 
@@ -95,4 +101,72 @@ main {
   letter-spacing: 1px;
   border: 3px solid #118c87;
   box-shadow: inset 0 -8px 0 #118c87;
+}
+
+#game-container {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 16px;
+  overflow: hidden;
+  padding: 24px;
+}
+
+.header-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 46px;
+}
+
+#turn-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 9px;
+  color: #a8bfc9;
+  background-color: #1f3641;
+  box-shadow: inset 0 -8px 0 #10212a;
+  width: 96;
+  height: 40;
+  border-radius: 5px;
+  padding: 12px;
+}
+
+.icon-turn {
+  width: 16px;
+}
+
+#turn-style {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17.64px;
+  letter-spacing: 0.88px;
+  text-align: center;
+}
+
+#icon-restart {
+  background-color: #a8bfc9;
+  box-shadow: inset 0 -8px 0 #6b8997;
+  width: 40;
+  height: 40;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+#game-zone {
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr;
+  gap: 20px;
+  margin-top: 100px;
+}
+
+#click-style {
+  background-color: #1f3641;
+  box-shadow: inset 0 -8px 0 #10212a;
+  width: 96;
+  height: 96;
+  border-radius: 10px;
 }

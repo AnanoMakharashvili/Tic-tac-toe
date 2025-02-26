@@ -8,23 +8,55 @@
   </head>
   <body>
     <main>
-      <img src="assets/logo.svg" rel="logo" class="logo" />
-      <div class="pick-player-container">
-        <h2 class="pick-style">PICK PLAYER 1’S MARK</h2>
-        <div class="button-section">
-          <img
-            src="assets/Combined Shape Copy 2.png"
-            rel="icon-x-outline"
-            id="x-btn"
-          />
-          <div id="o-player-style">
-            <img src="assets/Oval Copy.png" rel="icon-o-outline" id="o-btn" />
+      <div id="first-page">
+        <img src="assets/logo.svg" rel="logo" class="logo" />
+        <div class="pick-player-container">
+          <h2 class="pick-style">PICK PLAYER 1’S MARK</h2>
+          <div class="button-section">
+            <img
+              src="assets/Combined Shape Copy 2.png"
+              rel="icon-x-outline"
+              id="x-btn"
+            />
+            <div id="o-player-style">
+              <img src="assets/Oval Copy.png" rel="icon-o-outline" id="o-btn" />
+            </div>
           </div>
+          <span class="span-style">REMEMBER : X GOES FIRST</span>
         </div>
-        <span class="span-style">REMEMBER : X GOES FIRST</span>
+        <button id="button-one">NEW GAME (VS CPU)</button>
+        <button id="button-two">NEW GAME (VS PLAYER)</button>
       </div>
-      <button id="button-one">NEW GAME (VS CPU)</button>
-      <button id="button-two">NEW GAME (VS PLAYER)</button>
+      <div id="game-container">
+        <div class="header-section">
+          <img src="assets/logo.svg" rel="logo" class="logo-one" />
+          <div id="turn-section">
+            <img
+              src="assets/Combined Shape Copy 2.png"
+              rel="icon-x-outline"
+              class="icon-turn"
+            />
+            <span id="turn-style">TURN</span>
+          </div>
+          <img
+            src="assets/icon-restart.svg"
+            rel="icon-restart"
+            id="icon-restart"
+          />
+        </div>
+        <div id="game-zone">
+          <div id="click-style"></div>
+          <div id="click-style"></div>
+          <div id="click-style"></div>
+          <div id="click-style"></div>
+          <div id="click-style"></div>
+          <div id="click-style"></div>
+          <div id="click-style"></div>
+          <div id="click-style"></div>
+          <div id="click-style"></div>
+        </div>
+      </div>
     </main>
+    <script src="script.js"></script>
   </body>
 </html>
