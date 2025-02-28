@@ -80,6 +80,35 @@
             <span id="score-cpu">O (CPU)<span id="score-o">11</span></span>
           </div>
         </div>
+        <div id="result-box-lost" class="result-status-box">
+          <p class="result-text">OH NO, YOU LOST...</p>
+          <div class="image-text">
+            <img class="result-icon" src="assets/icon-o.svg" rel="o" />
+            <p class="strong-text"><strong>TAKES THE ROUND</strong></p>
+          </div>
+          <div class="button-container">
+            <button class="quit-btn" id="quit-btn-lost">QUIT</button>
+            <button class="next-btn" id="next-btn-lost">NEXT ROUND</button>
+          </div>
+        </div>
+        <div id="result-box-won" class="result-status-box">
+          <p class="result-text">YOU WON!</p>
+          <div class="image-text">
+            <img class="result-icon" src="assets/icon-x.svg" rel="x" />
+            <p class="strong-text"><strong>TAKES THE ROUND</strong></p>
+          </div>
+          <div class="button-container">
+            <button class="quit-btn" id="quit-btn-won">QUIT</button>
+            <button class="next-btn" id="next-btn-won">NEXT ROUND</button>
+          </div>
+        </div>
+        <div id="restart-game-container">
+          <p class="restart-options">RESTART GAME?</p>
+          <div class="button-container">
+            <button id="cancel-restart-btn">NO, CANCEL</button>
+            <button id="yes-restart-btn">YES, RESTART</button>
+          </div>
+        </div>
       </div>
     </main>
     <script src="script.js"></script>
