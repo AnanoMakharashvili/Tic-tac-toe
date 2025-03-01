@@ -132,7 +132,7 @@ main {
   width: 96;
   height: 40;
   border-radius: 5px;
-  padding: 12px;
+  padding: 17px;
 }
 
 .icon-turn {
@@ -189,11 +189,11 @@ main {
   margin-top: 31px;
 }
 
-.score-section {
+/* .score-section {
   display: flex;
   flex-direction: column;
   align-self: center;
-}
+} */
 
 #score-player {
   color: #1a2a33;
@@ -203,7 +203,7 @@ main {
   letter-spacing: 0.88px;
   text-align: center;
   background-color: #31c3bd;
-  padding: 18px 22px;
+  padding: 25px 22px;
   border-radius: 10px;
 }
 
@@ -227,7 +227,7 @@ main {
   letter-spacing: 0.88px;
   text-align: center;
   background-color: #a8bfc9;
-  padding: 18px 34px;
+  padding: 25px 34px;
   border-radius: 10px;
 }
 
@@ -251,7 +251,7 @@ main {
   letter-spacing: 0.88px;
   text-align: center;
   background-color: #f2b137;
-  padding: 18px 23px;
+  padding: 25px 23px;
   border-radius: 10px;
 }
 

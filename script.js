@@ -46,7 +46,7 @@ function resetGame() {
   gameZone.querySelectorAll(".click-style").forEach((cell) => {
     cell.innerHTML = "";
   });
-  turnStyle.textContent = "TURN: X";
+  turnStyle.textContent = "X  TURN";
   resultBoxLost.style.display = "none";
   resultBoxWon.style.display = "none";
   restartContainer.style.display = "none";
@@ -63,7 +63,7 @@ gameZone.addEventListener("click", (event) => {
       : "<img src='assets/icon-o.svg' class='o-style' />";
     checkWinner();
     isXTurn = !isXTurn;
-    turnStyle.textContent = `TURN: ${isXTurn ? "X" : "O"}`;
+    turnStyle.innerHTML = `<span>${isXTurn ? "X" : "O"}</span> TURN`;
   }
 });
 
