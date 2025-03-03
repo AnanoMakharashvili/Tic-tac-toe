@@ -82,22 +82,32 @@ function checkWinner() {
 
   lines.forEach((line) => {
     const [a, b, c] = line;
+
     if (
       cells[a].innerHTML &&
       cells[a].innerHTML === cells[b].innerHTML &&
       cells[a].innerHTML === cells[c].innerHTML
     ) {
-      gameResult = cells[a].innerHTML.includes("x-style") ? "won" : "lost";
+      const winner = cells[a].innerHTML.includes("x-style") ? "X" : "O";
+      gameResult = `${winner} won`;
       displayResult(gameResult);
       updateScore(gameResult);
+
+      const winColor = winner === "X" ? "#31C3BD" : "#F2B137";
+
+      cells[a].style.backgroundColor = winColor;
+      cells[b].style.backgroundColor = winColor;
+      cells[c].style.backgroundColor = winColor;
+
+      const winImage =
+        winner === "X"
+          ? "assets/icon-of-winner-x.svg"
+          : "assets/icon-of-winner-o.svg";
+      cells[a].querySelector("img").src = winImage;
+      cells[b].querySelector("img").src = winImage;
+      cells[c].querySelector("img").src = winImage;
     }
   });
-
-  if (!gameResult && cells.every((cell) => cell.innerHTML)) {
-    gameResult = "tie";
-    displayResult(gameResult);
-    updateScore(gameResult);
-  }
 }
 
 function displayResult(result) {
