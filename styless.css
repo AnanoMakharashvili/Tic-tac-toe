@@ -172,13 +172,13 @@ main {
 }
 
 .x-style {
-  transform: translate(27px, 20px);
-  width: 40px;
+  transform: translate(20px, 20px);
+  width: 55px;
 }
 
 .o-style {
-  transform: translate(27px, 20px);
-  width: 40px;
+  transform: translate(20px, 20px);
+  width: 55px;
 }
 
 .score-style {
@@ -303,6 +303,8 @@ main {
   flex-direction: row;
   align-items: center;
   gap: 18px;
+  margin-top: 15px;
+  margin-left: 23px;
 }
 
 .quit-btn {
@@ -333,9 +335,11 @@ main {
 
 #result-box-lost {
   display: none;
+  transform: translate(-3px, -271px);
 }
 #result-box-won {
   display: none;
+  transform: translate(-3px, -271px);
 }
 
 #restart-game-container {
@@ -346,6 +350,7 @@ main {
   background-color: #1f3641;
   padding: 30px;
   border-radius: 10px;
+  transform: translate(-6px, -271px);
 }
 
 .restart-options {

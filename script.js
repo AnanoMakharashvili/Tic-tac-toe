@@ -12,22 +12,35 @@ const scoreO = document.getElementById("score-o");
 const scoreT = document.getElementById("score-t");
 const xButton = document.getElementById("x-btn");
 const oButton = document.getElementById("o-btn");
-const buttonBack = document.getElementById("o-player-style");
+const iconRestart = document.getElementById("icon-restart");
+const quitButton = document.getElementById("quit-btn-won");
+const nextButton = document.getElementById("next-btn-won");
+const quitButtonLost = document.getElementById("quit-btn-lost");
+const nextButtonLost = document.getElementById("next-btn-lost");
 
 let isXTurn = true;
 let gameResult = null;
 let scores = { x: 0, o: 0, t: 0 };
 
+let isCpuGame = false;
+
 buttonOne.addEventListener("click", () => {
   gameContainer.style.display = "block";
   firstPage.style.display = "none";
   resetGame();
+  isCpuGame = true;
+  isXTurn = true;
+  turnStyle.innerHTML = "<span>X TURN</span>";
+  cpuTurn();
 });
 
 buttonTwo.addEventListener("click", () => {
   gameContainer.style.display = "block";
   firstPage.style.display = "none";
   resetGame();
+  isCpuGame = false;
+  isXTurn = true;
+  turnStyle.innerHTML = "<span>X TURN</span>";
 });
 
 xButton.addEventListener("click", () => {
@@ -40,16 +53,25 @@ oButton.addEventListener("click", () => {
   xButton.classList.remove("selected");
 });
 
+iconRestart.addEventListener("click", () => {
+  restartContainer.style.display = "block";
+});
+
 function resetGame() {
   isXTurn = true;
   gameResult = null;
   gameZone.querySelectorAll(".click-style").forEach((cell) => {
     cell.innerHTML = "";
+    cell.style.backgroundColor = "";
   });
-  turnStyle.textContent = "X  TURN";
+  turnStyle.textContent = "X TURN";
   resultBoxLost.style.display = "none";
   resultBoxWon.style.display = "none";
   restartContainer.style.display = "none";
+  quitButton.style.display = "none";
+  nextButton.style.display = "none";
+  quitButtonLost.style.display = "none";
+  nextButtonLost.style.display = "none";
 }
 
 gameZone.addEventListener("click", (event) => {
@@ -62,10 +84,32 @@ gameZone.addEventListener("click", (event) => {
       ? "<img src='assets/Combined Shape Copy 2 copy.png' class='x-style' />"
       : "<img src='assets/icon-o.svg' class='o-style' />";
     checkWinner();
-    isXTurn = !isXTurn;
-    turnStyle.innerHTML = `<span>${isXTurn ? "X" : "O"}</span> TURN`;
+    if (!gameResult) {
+      isXTurn = !isXTurn;
+      turnStyle.innerHTML = `<span>${isXTurn ? "X" : "O"}</span> TURN`;
+
+      if (isCpuGame && !isXTurn) {
+        cpuTurn();
+      }
+    }
   }
 });
+
+function cpuTurn() {
+  if (isCpuGame && !isXTurn && !gameResult) {
+    setTimeout(() => {
+      const emptyCells = Array.from(
+        gameZone.querySelectorAll(".click-style")
+      ).filter((cell) => !cell.innerHTML);
+      const randomCell =
+        emptyCells[Math.floor(Math.random() * emptyCells.length)];
+      randomCell.innerHTML = "<img src='assets/icon-o.svg' class='o-style' />";
+      checkWinner();
+      isXTurn = true;
+      turnStyle.innerHTML = "<span>X TURN</span>";
+    }, 500);
+  }
+}
 
 function checkWinner() {
   const cells = Array.from(gameZone.querySelectorAll(".click-style"));
@@ -103,6 +147,7 @@ function checkWinner() {
         winner === "X"
           ? "assets/icon-of-winner-x.svg"
           : "assets/icon-of-winner-o.svg";
+
       cells[a].querySelector("img").src = winImage;
       cells[b].querySelector("img").src = winImage;
       cells[c].querySelector("img").src = winImage;
@@ -111,12 +156,16 @@ function checkWinner() {
 }
 
 function displayResult(result) {
-  if (result === "won") {
+  if (result === "X won") {
     resultBoxLost.style.display = "none";
     resultBoxWon.style.display = "block";
-  } else if (result === "lost") {
+    quitButton.style.display = "block";
+    nextButton.style.display = "block";
+  } else if (result === "O won") {
     resultBoxWon.style.display = "none";
     resultBoxLost.style.display = "block";
+    quitButtonLost.style.display = "block";
+    nextButtonLost.style.display = "block";
   } else if (result === "tie") {
     resultBoxLost.style.display = "none";
     resultBoxWon.style.display = "none";
@@ -125,10 +174,10 @@ function displayResult(result) {
 }
 
 function updateScore(result) {
-  if (result === "won") {
+  if (result === "X won") {
     scores.x += 1;
     scoreX.textContent = scores.x;
-  } else if (result === "lost") {
+  } else if (result === "O won") {
     scores.o += 1;
     scoreO.textContent = scores.o;
   } else if (result === "tie") {
@@ -136,6 +185,32 @@ function updateScore(result) {
     scoreT.textContent = scores.t;
   }
 }
+
+quitButton.addEventListener("click", () => {
+  gameContainer.style.display = "none";
+  firstPage.style.display = "block";
+  resetGame();
+});
+
+nextButton.addEventListener("click", () => {
+  resetGame();
+  resultBoxWon.style.display = "none";
+  quitButton.style.display = "none";
+  nextButton.style.display = "none";
+});
+
+quitButtonLost.addEventListener("click", () => {
+  gameContainer.style.display = "none";
+  firstPage.style.display = "block";
+  resetGame();
+});
+
+nextButtonLost.addEventListener("click", () => {
+  resetGame();
+  resultBoxLost.style.display = "none";
+  quitButtonLost.style.display = "none";
+  nextButtonLost.style.display = "none";
+});
 
 document.getElementById("yes-restart-btn").addEventListener("click", () => {
   resetGame();
