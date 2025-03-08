@@ -79,7 +79,7 @@ gameZone.addEventListener("click", (event) => {
     !event.target.innerHTML &&
     !gameResult
   ) {
-    // კლიკის დროს მხოლოდ სურათის ცვლილება
+   
     const img = document.createElement("img");
     img.classList.add(isXTurn ? "x-style" : "o-style");
     img.src = isXTurn
