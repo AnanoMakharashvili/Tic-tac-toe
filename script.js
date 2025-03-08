@@ -73,17 +73,30 @@ function resetGame() {
   quitButtonLost.style.display = "none";
   nextButtonLost.style.display = "none";
 }
-
 gameZone.addEventListener("click", (event) => {
   if (
     event.target.classList.contains("click-style") &&
     !event.target.innerHTML &&
     !gameResult
   ) {
-    event.target.innerHTML = isXTurn
-      ? "<img src='assets/Combined Shape Copy 2 copy.png' class='x-style' />"
-      : "<img src='assets/icon-o.svg' class='o-style' />";
+    // კლიკის დროს მხოლოდ სურათის ცვლილება
+    const img = document.createElement("img");
+    img.classList.add(isXTurn ? "x-style" : "o-style");
+    img.src = isXTurn
+      ? "assets/Combined Shape Copy 2 copy.png"
+      : "assets/icon-o.svg";
+    event.target.appendChild(img);
+
+    if (isXTurn) {
+      event.target.classList.add("x-turn");
+      event.target.classList.remove("o-turn");
+    } else {
+      event.target.classList.add("o-turn");
+      event.target.classList.remove("x-turn");
+    }
+
     checkWinner();
+
     if (!gameResult) {
       isXTurn = !isXTurn;
       turnStyle.innerHTML = `<span>${isXTurn ? "X" : "O"}</span> TURN`;
