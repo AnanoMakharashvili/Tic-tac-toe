@@ -58,10 +58,17 @@ main {
   gap: 75px;
 }
 
-.selected {
-  background-color: #a8bfc9;
+#backgroundX,
+#backgroundO {
   padding: 11px 45px;
   border-radius: 10px;
+}
+
+#oGrey {
+  width: 32px;
+}
+#xBlue {
+  width: 32px;
 }
 
 .span-style {
@@ -412,4 +419,65 @@ main {
   background-image: url("assets/icon-o-outline.svg");
   background-position: center;
   background-repeat: no-repeat;
+}
+
+@media (min-width: 768px) {
+  .header-section {
+    gap: 85px;
+    justify-content: center;
+  }
+  #first-page {
+    gap: 25px;
+  }
+  .pick-player-container {
+    padding: 33px 63px;
+  }
+
+  .button-section {
+    padding: 17px 92px;
+  }
+
+  #button-one {
+    padding: 17px 123px;
+  }
+
+  #button-two {
+    padding: 17px 112px;
+  }
+
+  .click-style {
+    width: 140;
+    height: 140;
+    top: 272px;
+    left: 154px;
+    border-radius: 15px;
+  }
+
+  .score-style {
+    margin-top: 57px;
+    justify-content: center;
+    gap: 47px;
+  }
+
+  #score-player {
+    padding: 25px 33px;
+  }
+
+  #score-tie {
+    padding: 25px 44px;
+  }
+
+  #score-cpu {
+    padding: 25px 29px;
+  }
+
+  .x-style {
+    width: 64px;
+    transform: translate(36px, 37px);
+  }
+
+  .o-style {
+    width: 64px;
+    transform: translate(36px, 37px);
+  }
 }

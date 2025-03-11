@@ -1,3 +1,7 @@
+const buttonGrey = document.getElementById("oGrey");
+const buttonBlue = document.getElementById("xBlue");
+const backgroundX = document.getElementById("backgroundX");
+const backgroundO = document.getElementById("backgroundO");
 const buttonOne = document.getElementById("button-one");
 const buttonTwo = document.getElementById("button-two");
 const gameContainer = document.getElementById("game-container");
@@ -45,12 +49,57 @@ buttonTwo.addEventListener("click", () => {
 
 xButton.addEventListener("click", () => {
   xButton.classList.add("selected");
-  oButton.classList.remove("selected");
+  buttonGrey.classList.remove("selected");
+
+  buttonBlue.style.display = "block";
+  buttonGrey.style.display = "block";
+
+  backgroundX.style.display = "block";
+  backgroundO.style.display = "block";
+  xButton.style.display = "none";
+  oButton.style.display = "none";
+
+  backgroundX.style.backgroundColor = "#a8bfc9";
+  backgroundO.style.backgroundColor = "transparent";
+
+  xPlayer.innerHTML = "X (P1)";
+  oPlayer.innerHTML = "O (P2)";
+
+  xButton.style.backgroundColor = "#A8BFC9";
+  oButton.style.backgroundColor = "transparent";
+
+  buttonBlue.src = "./assets/xBlue.svg";
+  buttonGrey.src = "./assets/oGrey.svg";
+
+  clickedOnX = true;
 });
 
-oButton.addEventListener("click", () => {
-  oButton.classList.add("selected");
+buttonGrey.addEventListener("click", () => {
+  buttonGrey.classList.add("selected");
   xButton.classList.remove("selected");
+
+  buttonBlue.style.display = "block";
+  oButton.style.display = "block";
+  buttonGrey.style.display = "none";
+  xButton.style.display = "block";
+
+  backgroundX.style.display = "block";
+  backgroundO.style.display = "block";
+  buttonBlue.style.display = "none";
+
+  backgroundX.style.backgroundColor = "transparent";
+  backgroundO.style.backgroundColor = "#a8bfc9";
+
+  xPlayer.innerHTML = "X (P2)";
+  oPlayer.innerHTML = "O (P1)";
+
+  oButton.style.backgroundColor = "#A8BFC9";
+  xButton.style.backgroundColor = "transparent";
+
+  buttonBlue.src = "./assets/xGrey.svg";
+  buttonGrey.src = "./assets/oBlue.svg";
+
+  clickedOnX = false;
 });
 
 iconRestart.addEventListener("click", () => {
@@ -73,13 +122,13 @@ function resetGame() {
   quitButtonLost.style.display = "none";
   nextButtonLost.style.display = "none";
 }
+
 gameZone.addEventListener("click", (event) => {
   if (
     event.target.classList.contains("click-style") &&
     !event.target.innerHTML &&
     !gameResult
   ) {
-   
     const img = document.createElement("img");
     img.classList.add(isXTurn ? "x-style" : "o-style");
     img.src = isXTurn
