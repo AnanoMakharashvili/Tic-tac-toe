@@ -8,6 +8,7 @@ const gameContainer = document.getElementById("game-container");
 const firstPage = document.getElementById("first-page");
 const resultBoxLost = document.getElementById("result-box-lost");
 const resultBoxWon = document.getElementById("result-box-won");
+const resultTied = document.getElementById("round");
 const restartContainer = document.getElementById("restart-game-container");
 const gameZone = document.getElementById("game-zone");
 const turnStyle = document.getElementById("turn-style");
@@ -21,6 +22,8 @@ const quitButton = document.getElementById("quit-btn-won");
 const nextButton = document.getElementById("next-btn-won");
 const quitButtonLost = document.getElementById("quit-btn-lost");
 const nextButtonLost = document.getElementById("next-btn-lost");
+const quitButtonTied = document.getElementById("quit-btn-tied");
+const nextButtonTied = document.getElementById("next-btn-tied");
 
 let isXTurn = true;
 let gameResult = null;
@@ -116,11 +119,14 @@ function resetGame() {
   turnStyle.textContent = "X TURN";
   resultBoxLost.style.display = "none";
   resultBoxWon.style.display = "none";
+  resultTied.style.display = "none";
   restartContainer.style.display = "none";
   quitButton.style.display = "none";
   nextButton.style.display = "none";
   quitButtonLost.style.display = "none";
   nextButtonLost.style.display = "none";
+  nextButtonTied.style.display = "none";
+  quitButtonTied.style.display = "none";
 }
 
 gameZone.addEventListener("click", (event) => {
@@ -215,6 +221,11 @@ function checkWinner() {
       cells[c].querySelector("img").src = winImage;
     }
   });
+  if (!gameResult && cells.every((cell) => cell.innerHTML !== "")) {
+    gameResult = "tie";
+    displayResult(gameResult);
+    updateScore(gameResult);
+  }
 }
 
 function displayResult(result) {
@@ -223,15 +234,19 @@ function displayResult(result) {
     resultBoxWon.style.display = "block";
     quitButton.style.display = "block";
     nextButton.style.display = "block";
+    resultTied.style.display = "none";
   } else if (result === "O won") {
     resultBoxWon.style.display = "none";
     resultBoxLost.style.display = "block";
     quitButtonLost.style.display = "block";
     nextButtonLost.style.display = "block";
+    resultTied.style.display = "none";
   } else if (result === "tie") {
-    resultBoxLost.style.display = "none";
+    console.log("Displaying tie result");
     resultBoxWon.style.display = "none";
-    restartContainer.style.display = "block";
+    resultTied.style.display = "block";
+    quitButtonTied.style.display = "block";
+    nextButtonTied.style.display = "block";
   }
 }
 
@@ -272,6 +287,18 @@ nextButtonLost.addEventListener("click", () => {
   resultBoxLost.style.display = "none";
   quitButtonLost.style.display = "none";
   nextButtonLost.style.display = "none";
+});
+
+quitButtonTied.addEventListener("click", () => {
+  gameContainer.style.display = "none";
+  firstPage.style.display = "block";
+  resetGame();
+});
+nextButtonTied.addEventListener("click", () => {
+  resetGame();
+  resultTied.style.display = "none";
+  quitButtonTied.style.display = "none";
+  nextButtonTied.style.display = "none";
 });
 
 document.getElementById("yes-restart-btn").addEventListener("click", () => {
