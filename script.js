@@ -266,6 +266,7 @@ function updateScore(result) {
 quitButton.addEventListener("click", () => {
   gameContainer.style.display = "none";
   firstPage.style.display = "block";
+  firstPage.style.display = "flex";
   resetGame();
 });
 
@@ -279,6 +280,7 @@ nextButton.addEventListener("click", () => {
 quitButtonLost.addEventListener("click", () => {
   gameContainer.style.display = "none";
   firstPage.style.display = "block";
+  firstPage.style.display = "flex";
   resetGame();
 });
 
@@ -292,6 +294,7 @@ nextButtonLost.addEventListener("click", () => {
 quitButtonTied.addEventListener("click", () => {
   gameContainer.style.display = "none";
   firstPage.style.display = "block";
+  firstPage.style.display = "flex";
   resetGame();
 });
 nextButtonTied.addEventListener("click", () => {
