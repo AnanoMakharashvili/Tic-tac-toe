@@ -267,6 +267,7 @@ quitButton.addEventListener("click", () => {
   gameContainer.style.display = "none";
   firstPage.style.display = "block";
   firstPage.style.display = "flex";
+  firstPage.style.gap = "17px";
   resetGame();
 });
 
@@ -281,6 +282,7 @@ quitButtonLost.addEventListener("click", () => {
   gameContainer.style.display = "none";
   firstPage.style.display = "block";
   firstPage.style.display = "flex";
+  firstPage.style.gap = "17px";
   resetGame();
 });
 
@@ -295,6 +297,7 @@ quitButtonTied.addEventListener("click", () => {
   gameContainer.style.display = "none";
   firstPage.style.display = "block";
   firstPage.style.display = "flex";
+  firstPage.style.gap = "17px";
   resetGame();
 });
 nextButtonTied.addEventListener("click", () => {
