@@ -58,9 +58,15 @@ main {
   gap: 75px;
 }
 
-#backgroundX,
+/* #backgroundX,
 #backgroundO {
   padding: 11px 45px;
+  border-radius: 10px;
+} */
+
+#backgroundX,
+#backgroundO {
+  padding: 11px 50px;
   border-radius: 10px;
 }
 
@@ -69,8 +75,12 @@ main {
 }
 #xBlue {
   width: 32px;
+  display: none;
 }
 
+#o-btn {
+  display: none;
+}
 .span-style {
   font-weight: 400;
   font-size: 14px;
@@ -430,6 +440,7 @@ main {
   }
   .pick-player-container {
     padding: 33px 63px;
+    overflow: hidden;
   }
 
   .button-section {
@@ -478,5 +489,24 @@ main {
   .o-style {
     width: 64px;
     transform: translate(36px, 37px);
+  }
+
+  #result-box-won,
+  #result-box-lost,
+  #restart-game-container,
+  #round {
+    transform: translate(2px, -349px);
+    width: 100%;
+    max-width: 100vw;
+    position: fixed;
+    left: 0;
+  }
+
+  .image-text {
+    justify-content: center;
+  }
+
+  .button-container {
+    justify-content: center;
   }
 }
