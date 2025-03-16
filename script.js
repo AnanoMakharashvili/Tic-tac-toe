@@ -28,7 +28,6 @@ const nextButtonTied = document.getElementById("next-btn-tied");
 let isXTurn = true;
 let gameResult = null;
 let scores = { x: 0, o: 0, t: 0 };
-
 let isCpuGame = false;
 
 buttonOne.addEventListener("click", () => {
@@ -65,8 +64,8 @@ xButton.addEventListener("click", () => {
   backgroundX.style.backgroundColor = "#a8bfc9";
   backgroundO.style.backgroundColor = "transparent";
 
-  xPlayer.innerHTML = "X (P1)";
-  oPlayer.innerHTML = "O (P2)";
+  xButton.innerHTML = "X (P1)";
+  oButton.innerHTML = "O (P2)";
 
   xButton.style.backgroundColor = "#A8BFC9";
   oButton.style.backgroundColor = "transparent";
@@ -93,8 +92,8 @@ buttonGrey.addEventListener("click", () => {
   backgroundX.style.backgroundColor = "transparent";
   backgroundO.style.backgroundColor = "#a8bfc9";
 
-  xPlayer.innerHTML = "X (P2)";
-  oPlayer.innerHTML = "O (P1)";
+  xButton.innerHTML = "X (P2)";
+  oButton.innerHTML = "O (P1)";
 
   oButton.style.backgroundColor = "#A8BFC9";
   xButton.style.backgroundColor = "transparent";
@@ -145,9 +144,13 @@ gameZone.addEventListener("click", (event) => {
     if (isXTurn) {
       event.target.classList.add("x-turn");
       event.target.classList.remove("o-turn");
+      event.target.classList.add("xOutline");
+      event.target.classList.remove("oOutline");
     } else {
       event.target.classList.add("o-turn");
       event.target.classList.remove("x-turn");
+      event.target.classList.add("oOutline");
+      event.target.classList.remove("xOutline");
     }
 
     checkWinner();
