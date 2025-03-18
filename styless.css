@@ -441,9 +441,13 @@ main {
 }
 
 .click-style.oOutline:hover {
-  background-image: url("assets/icon-o-outline.svg") !important;
+  background-image: url("./assets/icon-o-outline.svg");
   background-repeat: no-repeat;
   background-position: center;
+}
+
+#game-zone .filled {
+  pointer-events: none;
 }
 
 @media (min-width: 768px) {
@@ -524,5 +528,21 @@ main {
 
   .button-container {
     justify-content: center;
+  }
+
+  .click-style.xOutline:hover {
+    background-image: url("./assets/icon-x-outline.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .click-style.oOutline:hover {
+    background-image: url("./assets/icon-o-outline.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  #game-zone .filled {
+    pointer-events: none;
   }
 }

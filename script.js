@@ -24,6 +24,8 @@ const quitButtonLost = document.getElementById("quit-btn-lost");
 const nextButtonLost = document.getElementById("next-btn-lost");
 const quitButtonTied = document.getElementById("quit-btn-tied");
 const nextButtonTied = document.getElementById("next-btn-tied");
+const yesRestartButton = document.getElementById("yes-restart-btn");
+const cancelRestartButton = document.getElementById("cancel-restart-btn");
 
 let isXTurn = true;
 let gameResult = null;
@@ -141,16 +143,28 @@ gameZone.addEventListener("click", (event) => {
       : "assets/icon-o.svg";
     event.target.appendChild(img);
 
-    if (isXTurn) {
-      event.target.classList.add("x-turn");
-      event.target.classList.remove("o-turn");
-      event.target.classList.add("xOutline");
-      event.target.classList.remove("oOutline");
+    if (!isXTurn) {
+      for (let i = 0; i < gameZone.children.length; i++) {
+        gameZone.children[i].classList.add("xOutline");
+        gameZone.children[i].classList.remove("oOutline");
+
+        if (gameZone.children[i].querySelector("img") !== null) {
+          gameZone.children[i].classList.add("filled");
+        } else {
+          gameZone.children[i].classList.remove("filled");
+        }
+      }
     } else {
-      event.target.classList.add("o-turn");
-      event.target.classList.remove("x-turn");
-      event.target.classList.add("oOutline");
-      event.target.classList.remove("xOutline");
+      for (let i = 0; i < gameZone.children.length; i++) {
+        gameZone.children[i].classList.add("oOutline");
+        gameZone.children[i].classList.remove("xOutline");
+
+        if (gameZone.children[i].querySelector("img") !== null) {
+          gameZone.children[i].classList.add("filled");
+        } else {
+          gameZone.children[i].classList.remove("filled");
+        }
+      }
     }
 
     checkWinner();
