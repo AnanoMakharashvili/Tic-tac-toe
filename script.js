@@ -181,6 +181,15 @@ function cpuTurn() {
       const randomCell =
         emptyCells[Math.floor(Math.random() * emptyCells.length)];
       randomCell.innerHTML = "<img src='assets/icon-o.svg' class='o-style' />";
+
+      gameZone.querySelectorAll(".oOutline").forEach((cell) => {
+        cell.classList.remove("oOutline");
+      });
+
+      gameZone.querySelectorAll(".xOutline").forEach((cell) => {
+        cell.classList.add("xOutline");
+      });
+
       checkWinner();
       isXTurn = true;
       turnStyle.innerHTML = "<span>X TURN</span>";
