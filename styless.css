@@ -446,8 +446,9 @@ main {
   background-position: center;
 }
 
-#game-zone .filled {
+.gameZone div.filled {
   pointer-events: none;
+  opacity: 1;
 }
 
 @media (min-width: 768px) {
@@ -540,9 +541,5 @@ main {
     background-image: url("./assets/icon-o-outline.svg");
     background-repeat: no-repeat;
     background-position: center;
-  }
-
-  #game-zone .filled {
-    pointer-events: none;
   }
 }

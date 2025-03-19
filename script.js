@@ -143,27 +143,19 @@ gameZone.addEventListener("click", (event) => {
       : "assets/icon-o.svg";
     event.target.appendChild(img);
 
-    if (!isXTurn) {
-      for (let i = 0; i < gameZone.children.length; i++) {
-        gameZone.children[i].classList.add("xOutline");
-        gameZone.children[i].classList.remove("oOutline");
+    if (!gameZone) return;
 
-        if (gameZone.children[i].querySelector("img") !== null) {
-          gameZone.children[i].classList.add("filled");
-        } else {
-          gameZone.children[i].classList.remove("filled");
-        }
-      }
-    } else {
-      for (let i = 0; i < gameZone.children.length; i++) {
-        gameZone.children[i].classList.add("oOutline");
-        gameZone.children[i].classList.remove("xOutline");
+    const outlineClass = isXTurn ? "oOutline" : "xOutline";
+    const removeClass = isXTurn ? "xOutline" : "oOutline";
 
-        if (gameZone.children[i].querySelector("img") !== null) {
-          gameZone.children[i].classList.add("filled");
-        } else {
-          gameZone.children[i].classList.remove("filled");
-        }
+    for (let cell of gameZone.children) {
+      if (cell.querySelector("img")) {
+        cell.classList.add("filled");
+        cell.classList.remove(outlineClass, removeClass);
+      } else {
+        cell.classList.remove("filled");
+        cell.classList.add(outlineClass);
+        cell.classList.remove(removeClass);
       }
     }
 
