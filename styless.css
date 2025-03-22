@@ -446,7 +446,7 @@ main {
   background-position: center;
 }
 
-.gameZone div.filled {
+#pointer {
   pointer-events: none;
   opacity: 1;
 }

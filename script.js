@@ -26,11 +26,21 @@ const quitButtonTied = document.getElementById("quit-btn-tied");
 const nextButtonTied = document.getElementById("next-btn-tied");
 const yesRestartButton = document.getElementById("yes-restart-btn");
 const cancelRestartButton = document.getElementById("cancel-restart-btn");
+const pointer = document.getElementById("pointer");
 
 let isXTurn = true;
 let gameResult = null;
 let scores = { x: 0, o: 0, t: 0 };
 let isCpuGame = false;
+let playerSymbol = "X";
+let cpuSymbol = "O";
+
+document
+  .getElementById("x-btn")
+  .addEventListener("click", () => startGame("X"));
+document
+  .getElementById("o-btn")
+  .addEventListener("click", () => startGame("O"));
 
 buttonOne.addEventListener("click", () => {
   gameContainer.style.display = "block";
@@ -143,21 +153,7 @@ gameZone.addEventListener("click", (event) => {
       : "assets/icon-o.svg";
     event.target.appendChild(img);
 
-    if (!gameZone) return;
-
-    const outlineClass = isXTurn ? "oOutline" : "xOutline";
-    const removeClass = isXTurn ? "xOutline" : "oOutline";
-
-    for (let cell of gameZone.children) {
-      if (cell.querySelector("img")) {
-        cell.classList.add("filled");
-        cell.classList.remove(outlineClass, removeClass);
-      } else {
-        cell.classList.remove("filled");
-        cell.classList.add(outlineClass);
-        cell.classList.remove(removeClass);
-      }
-    }
+    updateOutlineStyles();
 
     checkWinner();
 
@@ -172,6 +168,39 @@ gameZone.addEventListener("click", (event) => {
   }
 });
 
+function updateOutlineStyles() {
+  if (!isXTurn) {
+    for (let i = 0; i < gameZone.children.length; i++) {
+      if (!gameZone.children[i].querySelector("img")) {
+        gameZone.children[i].classList.add("xOutline");
+        gameZone.children[i].classList.remove("oOutline");
+      }
+    }
+    if (pointer && !pointer.querySelector("img")) {
+      pointer.classList.add("xOutline");
+      pointer.classList.remove("oOutline");
+    }
+  } else {
+    for (let i = 0; i < gameZone.children.length; i++) {
+      if (!gameZone.children[i].querySelector("img")) {
+        gameZone.children[i].classList.add("oOutline");
+        gameZone.children[i].classList.remove("xOutline");
+      }
+    }
+    if (pointer && !pointer.querySelector("img")) {
+      pointer.classList.add("oOutline");
+      pointer.classList.remove("xOutline");
+    }
+  }
+
+  gameZone.addEventListener("click", function (event) {
+    if (event.target && event.target.matches(".click-style")) {
+      event.target.classList.remove("xOutline");
+      event.target.classList.remove("oOutline");
+    }
+  });
+}
+
 function cpuTurn() {
   if (isCpuGame && !isXTurn && !gameResult) {
     setTimeout(() => {
@@ -182,13 +211,7 @@ function cpuTurn() {
         emptyCells[Math.floor(Math.random() * emptyCells.length)];
       randomCell.innerHTML = "<img src='assets/icon-o.svg' class='o-style' />";
 
-      gameZone.querySelectorAll(".oOutline").forEach((cell) => {
-        cell.classList.remove("oOutline");
-      });
-
-      gameZone.querySelectorAll(".xOutline").forEach((cell) => {
-        cell.classList.add("xOutline");
-      });
+      updateOutlineStyles();
 
       checkWinner();
       isXTurn = true;
