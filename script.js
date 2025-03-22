@@ -32,15 +32,22 @@ let isXTurn = true;
 let gameResult = null;
 let scores = { x: 0, o: 0, t: 0 };
 let isCpuGame = false;
-let playerSymbol = "X";
-let cpuSymbol = "O";
 
-document
-  .getElementById("x-btn")
-  .addEventListener("click", () => startGame("X"));
-document
-  .getElementById("o-btn")
-  .addEventListener("click", () => startGame("O"));
+xButton.addEventListener("click", () => {
+  isPlayerTurn = true;
+  isXTurn = false;
+  isCpuGame = true;
+  turnStyle.innerHTML = "<span>O TURN</span>";
+  cpuTurn();
+});
+
+oButton.addEventListener("click", () => {
+  isPlayerTurn = false;
+  isXTurn = true;
+  isCpuGame = true;
+  turnStyle.innerHTML = "<span>X TURN</span>";
+  cpuTurn();
+});
 
 buttonOne.addEventListener("click", () => {
   gameContainer.style.display = "block";
@@ -207,9 +214,17 @@ function cpuTurn() {
       const emptyCells = Array.from(
         gameZone.querySelectorAll(".click-style")
       ).filter((cell) => !cell.innerHTML);
+
       const randomCell =
         emptyCells[Math.floor(Math.random() * emptyCells.length)];
-      randomCell.innerHTML = "<img src='assets/icon-o.svg' class='o-style' />";
+
+      if (isXTurn) {
+        randomCell.innerHTML =
+          "<img src='assets/icon-x.svg' class='x-style' />";
+      } else {
+        randomCell.innerHTML =
+          "<img src='assets/icon-o.svg' class='o-style' />";
+      }
 
       updateOutlineStyles();
 
