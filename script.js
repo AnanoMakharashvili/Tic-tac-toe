@@ -34,23 +34,6 @@ let scores = { x: 0, o: 0, t: 0 };
 let isCpuGame = false;
 let isPlayerTurn = true;
 
-xButton.addEventListener("click", () => {
-  console.log(xButton);
-  isPlayerTurn = true;
-  isXTurn = true;
-  isCpuGame = true;
-  turnStyle.innerHTML = "<span>O TURN</span>";
-});
-
-oButton.addEventListener("click", () => {
-  console.log(oButton);
-  isPlayerTurn = false;
-  isXTurn = false;
-  isCpuGame = true;
-  turnStyle.innerHTML = "<span>X TURN</span>";
-  cpuTurn();
-});
-
 buttonOne.addEventListener("click", () => {
   gameContainer.style.display = "block";
   firstPage.style.display = "none";
@@ -87,6 +70,11 @@ xButton.addEventListener("click", () => {
   xButton.style.backgroundColor = "#A8BFC9";
   oButton.style.backgroundColor = "transparent";
 
+  isPlayerTurn = true;
+  isXTurn = true;
+  isCpuGame = true;
+  turnStyle.innerHTML = "<span>O TURN</span>";
+
   clickedOnX = true;
 });
 
@@ -111,6 +99,12 @@ buttonGrey.addEventListener("click", () => {
 
   oButton.style.backgroundColor = "#A8BFC9";
   xButton.style.backgroundColor = "transparent";
+
+  isPlayerTurn = false;
+  isXTurn = false;
+  isCpuGame = true;
+  turnStyle.innerHTML = "<span>X TURN</span>";
+  cpuTurn();
 
   clickedOnX = false;
 });
