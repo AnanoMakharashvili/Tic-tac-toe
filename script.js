@@ -32,18 +32,20 @@ let isXTurn = true;
 let gameResult = null;
 let scores = { x: 0, o: 0, t: 0 };
 let isCpuGame = false;
+let isPlayerTurn = true;
 
 xButton.addEventListener("click", () => {
+  console.log(xButton);
   isPlayerTurn = true;
-  isXTurn = false;
+  isXTurn = true;
   isCpuGame = true;
   turnStyle.innerHTML = "<span>O TURN</span>";
-  cpuTurn();
 });
 
 oButton.addEventListener("click", () => {
+  console.log(oButton);
   isPlayerTurn = false;
-  isXTurn = true;
+  isXTurn = false;
   isCpuGame = true;
   turnStyle.innerHTML = "<span>X TURN</span>";
   cpuTurn();
@@ -53,10 +55,6 @@ buttonOne.addEventListener("click", () => {
   gameContainer.style.display = "block";
   firstPage.style.display = "none";
   resetGame();
-  isCpuGame = true;
-  isXTurn = true;
-  turnStyle.innerHTML = "<span>X TURN</span>";
-  cpuTurn();
 });
 
 buttonTwo.addEventListener("click", () => {
@@ -89,9 +87,6 @@ xButton.addEventListener("click", () => {
   xButton.style.backgroundColor = "#A8BFC9";
   oButton.style.backgroundColor = "transparent";
 
-  buttonBlue.src = "./assets/xBlue.svg";
-  buttonGrey.src = "./assets/oGrey.svg";
-
   clickedOnX = true;
 });
 
@@ -116,9 +111,6 @@ buttonGrey.addEventListener("click", () => {
 
   oButton.style.backgroundColor = "#A8BFC9";
   xButton.style.backgroundColor = "transparent";
-
-  buttonBlue.src = "./assets/xGrey.svg";
-  buttonGrey.src = "./assets/oBlue.svg";
 
   clickedOnX = false;
 });
@@ -215,22 +207,19 @@ function cpuTurn() {
         gameZone.querySelectorAll(".click-style")
       ).filter((cell) => !cell.innerHTML);
 
-      const randomCell =
-        emptyCells[Math.floor(Math.random() * emptyCells.length)];
+      if (emptyCells.length > 0) {
+        const randomCell =
+          emptyCells[Math.floor(Math.random() * emptyCells.length)];
 
-      if (isXTurn) {
-        randomCell.innerHTML =
-          "<img src='assets/icon-x.svg' class='x-style' />";
-      } else {
         randomCell.innerHTML =
           "<img src='assets/icon-o.svg' class='o-style' />";
+
+        updateOutlineStyles();
+
+        checkWinner();
+        isXTurn = !isXTurn;
+        turnStyle.innerHTML = `<span>${isXTurn ? "X" : "O"} TURN</span>`;
       }
-
-      updateOutlineStyles();
-
-      checkWinner();
-      isXTurn = true;
-      turnStyle.innerHTML = "<span>X TURN</span>";
     }, 500);
   }
 }
@@ -248,21 +237,21 @@ function checkWinner() {
     [2, 4, 6],
   ];
 
+  let winner = null;
+
   lines.forEach((line) => {
     const [a, b, c] = line;
-
     if (
       cells[a].innerHTML &&
       cells[a].innerHTML === cells[b].innerHTML &&
       cells[a].innerHTML === cells[c].innerHTML
     ) {
-      const winner = cells[a].innerHTML.includes("x-style") ? "X" : "O";
+      winner = cells[a].innerHTML.includes("x-style") ? "X" : "O";
       gameResult = `${winner} won`;
       displayResult(gameResult);
       updateScore(gameResult);
 
       const winColor = winner === "X" ? "#31C3BD" : "#F2B137";
-
       cells[a].style.backgroundColor = winColor;
       cells[b].style.backgroundColor = winColor;
       cells[c].style.backgroundColor = winColor;
@@ -271,13 +260,13 @@ function checkWinner() {
         winner === "X"
           ? "assets/icon-of-winner-x.svg"
           : "assets/icon-of-winner-o.svg";
-
       cells[a].querySelector("img").src = winImage;
       cells[b].querySelector("img").src = winImage;
       cells[c].querySelector("img").src = winImage;
     }
   });
-  if (!gameResult && cells.every((cell) => cell.innerHTML !== "")) {
+
+  if (!winner && cells.every((cell) => cell.innerHTML !== "")) {
     gameResult = "tie";
     displayResult(gameResult);
     updateScore(gameResult);
@@ -298,7 +287,6 @@ function displayResult(result) {
     nextButtonLost.style.display = "block";
     resultTied.style.display = "none";
   } else if (result === "tie") {
-    console.log("Displaying tie result");
     resultBoxWon.style.display = "none";
     resultTied.style.display = "block";
     quitButtonTied.style.display = "block";
