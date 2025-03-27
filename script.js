@@ -2,8 +2,10 @@ const buttonGrey = document.getElementById("oGrey");
 const buttonBlue = document.getElementById("xBlue");
 const backgroundX = document.getElementById("backgroundX");
 const backgroundO = document.getElementById("backgroundO");
-const buttonOne = document.getElementById("button-one");
-const buttonTwo = document.getElementById("button-two");
+const cpuGameButton = document.getElementById("start-cpu-game-button");
+const multiplayerbutton = document.getElementById(
+  "start-multiplayer-game-button"
+);
 const gameContainer = document.getElementById("game-container");
 const firstPage = document.getElementById("first-page");
 const resultBoxLost = document.getElementById("result-box-lost");
@@ -33,14 +35,36 @@ let gameResult = null;
 let scores = { x: 0, o: 0, t: 0 };
 let isCpuGame = false;
 let isPlayerTurn = true;
+let playerChoiceOnComputerGame = "X";
 
-buttonOne.addEventListener("click", () => {
+// cpuGameButton.addEventListener("click", () => {
+//   gameContainer.style.display = "block";
+//   firstPage.style.display = "none";
+//   resetGame();
+//   if (playerChoiceOnComputerGame === "O" && isCpuGame) {
+//     cpuTurn();
+//   }
+// });
+
+cpuGameButton.addEventListener("click", () => {
   gameContainer.style.display = "block";
   firstPage.style.display = "none";
   resetGame();
+
+  if (playerChoiceOnComputerGame === "O" && isCpuGame) {
+    playerChoiceOnComputerGame = "O";
+    cpuChoice = "X";
+
+    cpuTurn();
+  } else if (playerChoiceOnComputerGame === "X" && isCpuGame) {
+    playerChoiceOnComputerGame = "X";
+    cpuChoice = "O";
+
+    cpuTurn();
+  }
 });
 
-buttonTwo.addEventListener("click", () => {
+multiplayerbutton.addEventListener("click", () => {
   gameContainer.style.display = "block";
   firstPage.style.display = "none";
   resetGame();
@@ -76,6 +100,8 @@ xButton.addEventListener("click", () => {
   turnStyle.innerHTML = "<span>O TURN</span>";
 
   clickedOnX = true;
+  playerChoiceOnComputerGame = "X";
+  cpuChoice = "O";
 });
 
 buttonGrey.addEventListener("click", () => {
@@ -107,6 +133,8 @@ buttonGrey.addEventListener("click", () => {
   cpuTurn();
 
   clickedOnX = false;
+  playerChoiceOnComputerGame = "O";
+  cpuChoice = "X";
 });
 
 iconRestart.addEventListener("click", () => {
@@ -153,10 +181,7 @@ gameZone.addEventListener("click", (event) => {
     if (!gameResult) {
       isXTurn = !isXTurn;
       turnStyle.innerHTML = `<span>${isXTurn ? "X" : "O"}</span> TURN`;
-
-      if (isCpuGame && !isXTurn) {
-        cpuTurn();
-      }
+      cpuTurn();
     }
   }
 });
@@ -195,26 +220,29 @@ function updateOutlineStyles() {
 }
 
 function cpuTurn() {
-  if (isCpuGame && !isXTurn && !gameResult) {
-    setTimeout(() => {
-      const emptyCells = Array.from(
-        gameZone.querySelectorAll(".click-style")
-      ).filter((cell) => !cell.innerHTML);
+  if (isCpuGame && isXTurn && !gameResult) {
+    const emptyCells = Array.from(
+      gameZone.querySelectorAll(".click-style")
+    ).filter((cell) => !cell.innerHTML);
 
-      if (emptyCells.length > 0) {
-        const randomCell =
-          emptyCells[Math.floor(Math.random() * emptyCells.length)];
+    if (emptyCells.length > 0) {
+      const randomCell =
+        emptyCells[Math.floor(Math.random() * emptyCells.length)];
 
+      if (playerChoiceOnComputerGame === "X") {
         randomCell.innerHTML =
           "<img src='assets/icon-o.svg' class='o-style' />";
-
-        updateOutlineStyles();
-
-        checkWinner();
-        isXTurn = !isXTurn;
-        turnStyle.innerHTML = `<span>${isXTurn ? "X" : "O"} TURN</span>`;
+      } else if (playerChoiceOnComputerGame === "O") {
+        randomCell.innerHTML =
+          "<img src='assets/icon-x.svg' class='x-style' />";
       }
-    }, 500);
+
+      updateOutlineStyles();
+      checkWinner();
+
+      isXTurn = !isXTurn;
+      turnStyle.innerHTML = `<span>${isXTurn ? "X" : "O"} TURN</span>`;
+    }
   }
 }
 

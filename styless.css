@@ -83,7 +83,7 @@ main {
   letter-spacing: 0.88px;
   text-align: center;
 }
-#button-one {
+#start-cpu-game-button {
   cursor: pointer;
   background-color: #f2b137;
   color: #1a2a33;
@@ -99,11 +99,11 @@ main {
   box-shadow: inset 0 -8px 0 #cc8b13;
 }
 
-#button-one:hover {
+#start-cpu-game-button:hover {
   background-color: #ffc860;
 }
 
-#button-two {
+#start-multiplayer-game-button {
   cursor: pointer;
   background-color: #31c3bd;
   color: #1a2a33;
@@ -119,7 +119,7 @@ main {
   box-shadow: inset 0 -8px 0 #118c87;
 }
 
-#button-two:hover {
+#start-multiplayer-game-button:hover {
   background-color: #65e9e4;
 }
 
@@ -468,11 +468,11 @@ main {
     padding: 17px 92px;
   }
 
-  #button-one {
+  #start-cpu-game-button {
     padding: 17px 123px;
   }
 
-  #button-two {
+  #start-multiplayer-game-button {
     padding: 17px 112px;
   }
 
