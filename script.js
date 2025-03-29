@@ -19,6 +19,8 @@ const scoreO = document.getElementById("score-o");
 const scoreT = document.getElementById("score-t");
 const xButton = document.getElementById("x-btn");
 const oButton = document.getElementById("o-btn");
+const resultText = document.getElementById("result-text");
+const playerTwoWin = document.getElementById("player-two-win");
 const iconRestart = document.getElementById("icon-restart");
 const quitButton = document.getElementById("quit-btn-won");
 const nextButton = document.getElementById("next-btn-won");
@@ -155,6 +157,8 @@ function resetGame() {
 
   if (playerChoiceOnComputerGame === "O") {
     cpuTurn();
+    resultText.style.display = "none";
+    playerTwoWin.style.display = "block";
   }
 }
 

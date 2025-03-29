@@ -301,6 +301,16 @@ main {
   text-align: center;
 }
 
+.player-two-win {
+  color: #a8bfc9;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17.64px;
+  letter-spacing: 0.88px;
+  text-align: center;
+  display: none;
+}
+
 .image-text {
   display: flex;
   flex-direction: row;
