@@ -37,7 +37,7 @@ let isCpuGame = false;
 let isPlayerTurn = true;
 let playerChoiceOnComputerGame = "X";
 
-cpuGameButton.EventListener("click", () => {
+cpuGameButton.addEventListener("click", () => {
   gameContainer.style.display = "block";
   firstPage.style.display = "none";
   resetGame();
