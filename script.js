@@ -135,11 +135,14 @@ iconRestart.addEventListener("click", () => {
 function resetGame() {
   isXTurn = true;
   gameResult = null;
+
   gameZone.querySelectorAll(".click-style").forEach((cell) => {
     cell.innerHTML = "";
     cell.style.backgroundColor = "";
   });
+
   turnStyle.textContent = "X TURN";
+
   resultBoxLost.style.display = "none";
   resultBoxWon.style.display = "none";
   resultTied.style.display = "none";
@@ -150,6 +153,10 @@ function resetGame() {
   nextButtonLost.style.display = "none";
   nextButtonTied.style.display = "none";
   quitButtonTied.style.display = "none";
+
+  if (playerChoiceOnComputerGame === "O") {
+    cpuTurn();
+  }
 }
 
 gameZone.addEventListener("click", (event) => {
@@ -218,17 +225,22 @@ function cpuTurn() {
       playerChoiceOnComputerGame === "X") ||
     (isCpuGame && isXTurn && !gameResult && playerChoiceOnComputerGame === "O")
   ) {
-    const emptyCells = Array.from(
-      gameZone.querySelectorAll(".click-style")
-    ).filter((cell) => !cell.innerHTML);
+    const cells = Array.from(gameZone.querySelectorAll(".click-style"));
+    const emptyCells = cells.filter((cell) => !cell.innerHTML);
 
-    if (emptyCells.length > 0) {
-      const randomCell =
-        emptyCells[Math.floor(Math.random() * emptyCells.length)];
+    const cpuSymbol = playerChoiceOnComputerGame === "X" ? "O" : "X";
+    const playerSymbol = cpuSymbol === "X" ? "O" : "X";
 
-      const cpuSymbol = playerChoiceOnComputerGame === "X" ? "O" : "X";
-      randomCell.innerHTML = `<img src='assets/icon-${cpuSymbol.toLowerCase()}.svg' class='${cpuSymbol.toLowerCase()}-style' />`;
+    let bestMove = findBestMove(cells, cpuSymbol);
+    if (!bestMove) {
+      bestMove = findBestMove(cells, playerSymbol);
+    }
+    if (!bestMove) {
+      bestMove = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+    }
 
+    if (bestMove) {
+      bestMove.innerHTML = `<img src='assets/icon-${cpuSymbol.toLowerCase()}.svg' class='${cpuSymbol.toLowerCase()}-style' />`;
       updateOutlineStyles();
       checkWinner();
 
@@ -236,6 +248,33 @@ function cpuTurn() {
       turnStyle.innerHTML = `<span>${isXTurn ? "X" : "O"} TURN</span>`;
     }
   }
+}
+
+function findBestMove(cells, symbol) {
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+
+  for (const line of lines) {
+    const [a, b, c] = line;
+    const values = [cells[a].innerHTML, cells[b].innerHTML, cells[c].innerHTML];
+
+    if (
+      values.filter((val) => val.includes(`${symbol.toLowerCase()}-style`))
+        .length === 2 &&
+      values.includes("")
+    ) {
+      return cells[line[values.indexOf("")]];
+    }
+  }
+  return null;
 }
 
 function checkWinner() {
