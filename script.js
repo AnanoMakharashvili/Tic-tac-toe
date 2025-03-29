@@ -36,26 +36,26 @@ let scores = { x: 0, o: 0, t: 0 };
 let isCpuGame = false;
 let isPlayerTurn = true;
 let playerChoiceOnComputerGame = "X";
+let isXOrOSelected = false;
 
 cpuGameButton.addEventListener("click", () => {
+  if (!isXOrOSelected) return;
   gameContainer.style.display = "block";
   firstPage.style.display = "none";
   resetGame();
-
   if (playerChoiceOnComputerGame === "O" && isCpuGame) {
     playerChoiceOnComputerGame = "O";
     cpuChoice = "X";
-
     cpuTurn();
   } else if (playerChoiceOnComputerGame === "X" && isCpuGame) {
     playerChoiceOnComputerGame = "X";
     cpuChoice = "O";
-
     cpuTurn();
   }
 });
 
 multiplayerbutton.addEventListener("click", () => {
+  if (!isXOrOSelected) return;
   gameContainer.style.display = "block";
   firstPage.style.display = "none";
   resetGame();
@@ -88,8 +88,8 @@ xButton.addEventListener("click", () => {
   isPlayerTurn = true;
   isXTurn = true;
   isCpuGame = true;
+  isXOrOSelected = true;
   turnStyle.innerHTML = "<span>O TURN</span>";
-
   clickedOnX = true;
   playerChoiceOnComputerGame = "X";
   cpuChoice = "O";
@@ -120,9 +120,9 @@ buttonGrey.addEventListener("click", () => {
   isPlayerTurn = false;
   isXTurn = false;
   isCpuGame = true;
+  isXOrOSelected = true;
   turnStyle.innerHTML = "<span>X TURN</span>";
   cpuTurn();
-
   clickedOnX = false;
   playerChoiceOnComputerGame = "O";
   cpuChoice = "X";
@@ -135,7 +135,6 @@ iconRestart.addEventListener("click", () => {
 function resetGame() {
   isXTurn = true;
   gameResult = null;
-
   gameZone.querySelectorAll(".click-style").forEach((cell) => {
     cell.innerHTML = "";
     cell.style.backgroundColor = "";

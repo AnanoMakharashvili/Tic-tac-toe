@@ -320,6 +320,14 @@ main {
   letter-spacing: 1.5px;
 }
 
+.strong-text-one {
+  color: #31c3bd;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30.24px;
+  letter-spacing: 1.5px;
+}
+
 .button-container {
   display: flex;
   flex-direction: row;
