@@ -37,16 +37,7 @@ let isCpuGame = false;
 let isPlayerTurn = true;
 let playerChoiceOnComputerGame = "X";
 
-// cpuGameButton.addEventListener("click", () => {
-//   gameContainer.style.display = "block";
-//   firstPage.style.display = "none";
-//   resetGame();
-//   if (playerChoiceOnComputerGame === "O" && isCpuGame) {
-//     cpuTurn();
-//   }
-// });
-
-cpuGameButton.addEventListener("click", () => {
+cpuGameButton.EventListener("click", () => {
   gameContainer.style.display = "block";
   firstPage.style.display = "none";
   resetGame();
@@ -220,7 +211,13 @@ function updateOutlineStyles() {
 }
 
 function cpuTurn() {
-  if (isCpuGame && isXTurn && !gameResult) {
+  if (
+    (isCpuGame &&
+      !isXTurn &&
+      !gameResult &&
+      playerChoiceOnComputerGame === "X") ||
+    (isCpuGame && isXTurn && !gameResult && playerChoiceOnComputerGame === "O")
+  ) {
     const emptyCells = Array.from(
       gameZone.querySelectorAll(".click-style")
     ).filter((cell) => !cell.innerHTML);
@@ -229,13 +226,8 @@ function cpuTurn() {
       const randomCell =
         emptyCells[Math.floor(Math.random() * emptyCells.length)];
 
-      if (playerChoiceOnComputerGame === "X") {
-        randomCell.innerHTML =
-          "<img src='assets/icon-o.svg' class='o-style' />";
-      } else if (playerChoiceOnComputerGame === "O") {
-        randomCell.innerHTML =
-          "<img src='assets/icon-x.svg' class='x-style' />";
-      }
+      const cpuSymbol = playerChoiceOnComputerGame === "X" ? "O" : "X";
+      randomCell.innerHTML = `<img src='assets/icon-${cpuSymbol.toLowerCase()}.svg' class='${cpuSymbol.toLowerCase()}-style' />`;
 
       updateOutlineStyles();
       checkWinner();
